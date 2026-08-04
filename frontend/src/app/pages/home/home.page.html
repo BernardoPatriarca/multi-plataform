@@ -1,0 +1,65 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="hero-toolbar">
+    <ion-title>Inicio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleTheme()">
+        <ion-icon [name]="themeService.isDark() ? 'sunny-outline' : 'moon-outline'" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="hero">
+    <div class="hero-avatar">{{ iniciais || '?' }}</div>
+    <h1>Ola, {{ authService.currentUser()?.nome }} <ion-icon name="sparkles-outline"></ion-icon></h1>
+    <p>{{ authService.currentUser()?.email || authService.currentUser()?.login }}</p>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="stats-row">
+      <div class="stat-card fade-in-item">
+        <div class="stat-icon"><ion-icon name="people-outline"></ion-icon></div>
+        <div class="stat-info">
+          <ion-skeleton-text *ngIf="totalUsuarios === null" animated style="width: 40px; height: 22px;"></ion-skeleton-text>
+          <h2 *ngIf="totalUsuarios !== null">{{ totalUsuarios }}</h2>
+          <p>Usuarios</p>
+        </div>
+      </div>
+
+      <div class="stat-card fade-in-item">
+        <div class="stat-icon estoque"><ion-icon name="cube-outline"></ion-icon></div>
+        <div class="stat-info">
+          <ion-skeleton-text *ngIf="totalProdutos === null" animated style="width: 40px; height: 22px;"></ion-skeleton-text>
+          <h2 *ngIf="totalProdutos !== null">{{ totalProdutos }}</h2>
+          <p>Produtos</p>
+        </div>
+      </div>
+
+      <div class="stat-card fade-in-item">
+        <div class="stat-icon financeiro"><ion-icon name="wallet-outline"></ion-icon></div>
+        <div class="stat-info">
+          <ion-skeleton-text *ngIf="saldoFinanceiro === null" animated style="width: 60px; height: 22px;"></ion-skeleton-text>
+          <h2 *ngIf="saldoFinanceiro !== null" class="saldo-value">{{ formatarMoeda(saldoFinanceiro) }}</h2>
+          <p>Saldo</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Menu</h3>
+
+    <div class="menu-tile fade-in-item" *ngFor="let tile of menuTiles" [ngClass]="tile.classe" (click)="goTo(tile.rota)">
+      <div class="menu-tile-icon">
+        <ion-icon [name]="tile.icone"></ion-icon>
+      </div>
+      <div class="menu-tile-info">
+        <h3>{{ tile.titulo }}</h3>
+        <p>{{ tile.descricao }}</p>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="menu-tile-arrow"></ion-icon>
+    </div>
+  </div>
+</ion-content>

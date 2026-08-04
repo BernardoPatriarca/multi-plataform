@@ -1,0 +1,111 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="hero-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Estoque</ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="hero-toolbar">
+    <ion-searchbar
+      [formControl]="searchControl"
+      placeholder="Buscar por nome ou codigo"
+      debounce="0"
+      class="custom-searchbar"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="list-summary" *ngIf="!loading">
+    {{ totalElements }} {{ totalElements === 1 ? 'produto encontrado' : 'produtos encontrados' }}
+  </div>
+
+  <div class="loading-wrapper" *ngIf="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && produtos.length === 0">
+    <ion-icon name="cube-outline"></ion-icon>
+    <p>Nenhum produto encontrado.</p>
+  </div>
+
+  <div class="produtos-grid" *ngIf="!loading && produtos.length > 0">
+    <div class="produto-card fade-in-item" *ngFor="let produto of produtos">
+      <div class="produto-card-top">
+        <div class="produto-icon" [class.inactive]="!produto.ativo">
+          <ion-icon name="cube-outline"></ion-icon>
+        </div>
+        <div class="produto-main-info">
+          <h2>{{ produto.nome }}</h2>
+          <p class="codigo-line"><ion-icon name="pricetag-outline"></ion-icon>{{ produto.codigo }} &middot; {{ produto.unidadeMedida }}</p>
+        </div>
+        <div class="badges-col">
+          <ion-badge [color]="produto.ativo ? 'success' : 'medium'" class="status-badge">
+            {{ produto.ativo ? 'Ativo' : 'Inativo' }}
+          </ion-badge>
+          <ion-badge *ngIf="produto.estoqueBaixo" color="warning" class="status-badge">
+            <ion-icon name="alert-circle-outline"></ion-icon> Estoque baixo
+          </ion-badge>
+        </div>
+      </div>
+
+      <div class="produto-card-details">
+        <div class="detail-row">
+          <span class="detail-label">Custo</span>
+          <span>{{ formatarMoeda(produto.precoCusto) }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Venda</span>
+          <span>{{ formatarMoeda(produto.precoVenda) }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Estoque</span>
+          <span>{{ produto.quantidadeEstoque }} {{ produto.unidadeMedida }} (min. {{ produto.estoqueMinimo }})</span>
+        </div>
+        <div class="detail-row" *ngIf="produto.categoria">
+          <span class="detail-label">Categoria</span>
+          <span>{{ produto.categoria }}</span>
+        </div>
+        <div class="detail-row" *ngIf="produto.fornecedor">
+          <ion-icon name="business-outline"></ion-icon>
+          <span>{{ produto.fornecedor }}</span>
+        </div>
+        <div class="detail-row" *ngIf="produto.localizacao">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ produto.localizacao }}</span>
+        </div>
+      </div>
+
+      <div class="produto-card-actions">
+        <ion-button fill="clear" size="small" (click)="openForm(produto)">
+          <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+          Editar
+        </ion-button>
+        <ion-button fill="clear" size="small" color="danger" (click)="confirmDelete(produto)">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
+          Excluir
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="!loading && totalPages > 1">
+    <ion-button fill="clear" [disabled]="page === 0" (click)="prevPage()">
+      <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <span>Pagina {{ page + 1 }} de {{ totalPages }}</span>
+    <ion-button fill="clear" [disabled]="page + 1 >= totalPages" (click)="nextPage()">
+      <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openForm(null)" class="gradient-fab">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

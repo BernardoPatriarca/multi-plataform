@@ -1,0 +1,160 @@
+.hero-toolbar {
+  --background: #0369a1;
+  --color: #fff;
+}
+
+.custom-searchbar {
+  --background: rgba(255, 255, 255, 0.16);
+  --color: #fff;
+  --placeholder-color: rgba(255, 255, 255, 0.75);
+  --icon-color: #fff;
+  --border-radius: 12px;
+}
+
+.list-summary {
+  padding: 14px 16px 4px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.loading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 0;
+}
+
+.produtos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 16px 96px;
+}
+
+.produto-card {
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 16px;
+}
+
+.produto-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.produto-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  background: var(--app-gradient-cool);
+  flex-shrink: 0;
+
+  &.inactive {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  }
+}
+
+.produto-main-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.produto-main-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.codigo-line {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.codigo-line ion-icon {
+  font-size: 13px;
+}
+
+.badges-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  font-weight: 600;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.produto-card-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--ion-color-light-shade, #e5e7eb);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  justify-content: space-between;
+}
+
+.detail-row ion-icon {
+  font-size: 15px;
+  color: var(--ion-color-secondary);
+  flex-shrink: 0;
+  margin-right: auto;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.produto-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 24px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.gradient-fab {
+  --background: var(--app-gradient-cool);
+  --box-shadow: var(--app-shadow-glow);
+}

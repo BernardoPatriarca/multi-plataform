@@ -1,0 +1,198 @@
+.hero-toolbar {
+  --background: #047857;
+  --color: #fff;
+}
+
+.resumo-row {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+}
+
+.resumo-card {
+  flex: 1;
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.resumo-card ion-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.resumo-card.receita ion-icon { color: var(--ion-color-success); }
+.resumo-card.despesa ion-icon { color: var(--ion-color-danger); }
+.resumo-card.saldo ion-icon { color: var(--ion-color-primary); }
+
+.resumo-card p {
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+}
+
+.resumo-card h3 {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tipo-filter {
+  margin: 0 16px 8px;
+}
+
+.local-searchbar {
+  padding: 0 12px;
+  --background: var(--ion-color-light, #f3f4f6);
+  --border-radius: 12px;
+}
+
+.list-summary {
+  padding: 10px 16px 4px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.loading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 0;
+}
+
+.lancamentos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 16px 96px;
+}
+
+.lancamento-card {
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 16px;
+}
+
+.lancamento-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.lancamento-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  background: var(--app-gradient-success);
+  flex-shrink: 0;
+
+  &.despesa {
+    background: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%);
+  }
+}
+
+.lancamento-main-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lancamento-main-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.categoria-line {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+}
+
+.valor-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.valor {
+  font-weight: 700;
+  color: var(--ion-color-success);
+  white-space: nowrap;
+
+  &.despesa {
+    color: var(--ion-color-danger);
+  }
+}
+
+.status-badge {
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 0.65rem;
+}
+
+.lancamento-card-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--ion-color-light-shade, #e5e7eb);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+}
+
+.detail-row ion-icon {
+  font-size: 15px;
+  color: var(--ion-color-secondary);
+  flex-shrink: 0;
+}
+
+.lancamento-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 24px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.gradient-fab {
+  --background: var(--app-gradient-success);
+  --box-shadow: var(--app-shadow-glow);
+}

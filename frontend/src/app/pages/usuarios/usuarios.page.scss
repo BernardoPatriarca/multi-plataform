@@ -1,0 +1,135 @@
+.hero-toolbar {
+  --background: #4338ca;
+  --color: #fff;
+}
+
+.custom-searchbar {
+  --background: rgba(255, 255, 255, 0.16);
+  --color: #fff;
+  --placeholder-color: rgba(255, 255, 255, 0.75);
+  --icon-color: #fff;
+  --border-radius: 12px;
+}
+
+.list-summary {
+  padding: 14px 16px 4px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.loading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 0;
+}
+
+.usuarios-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 16px 96px;
+}
+
+.usuario-card {
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 16px;
+}
+
+.usuario-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-initials {
+  width: 48px;
+  height: 48px;
+  font-size: 1rem;
+
+  &.inactive {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  }
+}
+
+.usuario-main-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.usuario-main-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.login-line {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.login-line ion-icon {
+  font-size: 13px;
+}
+
+.status-badge {
+  flex-shrink: 0;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.usuario-card-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--ion-color-light-shade, #e5e7eb);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+}
+
+.detail-row ion-icon {
+  font-size: 15px;
+  color: var(--ion-color-primary);
+  flex-shrink: 0;
+}
+
+.usuario-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 24px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.gradient-fab {
+  --background: var(--app-gradient-primary);
+  --box-shadow: var(--app-shadow-glow);
+}

@@ -1,0 +1,37 @@
+.form-toolbar {
+  --background: #047857;
+  --color: #fff;
+}
+
+.tipo-segment {
+  margin-bottom: 16px;
+}
+
+.form-grid {
+  padding: 0;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ion-color-medium);
+  margin: 20px 4px 8px;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.form-error.banner {
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 16px;
+}
+
+.submit-btn {
+  --background: var(--app-gradient-success);
+  --box-shadow: var(--app-shadow-glow);
+  font-weight: 600;
+}

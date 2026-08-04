@@ -1,0 +1,183 @@
+.hero-toolbar {
+  --background: #4338ca;
+  --color: #fff;
+  --border-width: 0 !important;
+}
+
+.hero {
+  background: var(--app-gradient-hero);
+  padding: 24px 24px 56px;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 0 32px 32px;
+  box-shadow: var(--app-shadow-lg);
+  margin-top: -1px;
+}
+
+.hero-avatar {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.hero h1 {
+  font-size: 1.4rem;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.hero p {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.dashboard-content {
+  padding: 20px 16px 32px;
+  margin-top: -32px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  flex: 1;
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--app-gradient-primary);
+  color: #fff;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.stat-icon.success {
+  background: var(--app-gradient-success);
+}
+
+.stat-icon.estoque {
+  background: var(--app-gradient-cool);
+}
+
+.stat-icon.financeiro {
+  background: var(--app-gradient-success);
+}
+
+.stat-info h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.stat-info h2.saldo-value {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.stat-info p {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  color: var(--ion-color-medium);
+}
+
+.section-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ion-color-medium);
+  margin: 0 4px 12px;
+}
+
+.menu-tile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.menu-tile:active {
+  transform: scale(0.98);
+}
+
+.menu-tile + .menu-tile {
+  margin-top: 12px;
+}
+
+.menu-tile-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--app-gradient-cool);
+  color: #fff;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.tile-usuarios .menu-tile-icon {
+  background: var(--app-gradient-primary);
+}
+
+.tile-estoque .menu-tile-icon {
+  background: var(--app-gradient-cool);
+}
+
+.tile-financeiro .menu-tile-icon {
+  background: var(--app-gradient-success);
+}
+
+.menu-tile-info {
+  flex: 1;
+}
+
+.menu-tile-info h3 {
+  margin: 0 0 2px;
+  font-weight: 600;
+}
+
+.menu-tile-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+}
+
+.menu-tile-arrow {
+  font-size: 20px;
+  color: var(--ion-color-medium);
+}

@@ -1,0 +1,179 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+/* O autofill do navegador/gerenciador de senhas forca fundo branco por padrao,
+   quebrando o tema escuro. O input real do ion-input fica em Shadow DOM, entao
+   o override precisa mirar na parte exposta (::part(native)) em vez do seletor
+   "input" comum, que nao atravessa a shadow boundary. */
+ion-input::part(native):-webkit-autofill,
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--ion-text-color);
+  -webkit-box-shadow: 0 0 0 1000px var(--ion-item-background, #fff) inset;
+  box-shadow: 0 0 0 1000px var(--ion-item-background, #fff) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* ion-segment calcula a cor do texto nao selecionado a partir de uma escala
+   de tons que nao foi definida para o nosso tema escuro customizado, deixando
+   o texto quase invisivel. Aqui fixamos cores explicitas para os dois estados. */
+ion-segment-button {
+  --color: var(--ion-color-medium);
+  --color-checked: var(--ion-color-primary);
+  font-weight: 600;
+}
+
+/* ===== Auth (login/register) ===== */
+
+.auth-page {
+  --background: var(--app-gradient-hero);
+}
+
+.auth-page::part(background) {
+  background: var(--app-gradient-hero);
+}
+
+.auth-card {
+  max-width: 440px;
+  margin: 0 auto;
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-lg);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  animation: rise-in 0.5s ease both;
+}
+
+body.dark .auth-card {
+  background: rgba(23, 17, 48, 0.92);
+}
+
+.brand-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: var(--app-gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  box-shadow: var(--app-shadow-glow);
+}
+
+.brand-logo ion-icon {
+  font-size: 32px;
+  color: #fff;
+}
+
+.brand-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ===== Utilitarios gerais ===== */
+
+.form-error {
+  color: var(--ion-color-danger);
+  font-size: 0.8rem;
+  padding: 4px 12px 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 16px;
+  color: var(--ion-color-medium);
+  text-align: center;
+  gap: 8px;
+}
+
+.empty-state ion-icon {
+  font-size: 52px;
+  opacity: 0.5;
+}
+
+.gradient-text {
+  background: var(--app-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass-surface {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  color: #fff;
+  background: var(--app-gradient-primary);
+  flex-shrink: 0;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-item {
+  animation: rise-in 0.35s ease both;
+}
+
+/* ===== Layout responsivo (desktop/web) =====
+   Em telas largas (navegador/desktop), o conteudo passa a ficar centralizado
+   com largura maxima, como num site comum, em vez de esticar de ponta a ponta.
+   No mobile (abaixo do breakpoint) nada muda: continua ocupando a tela toda. */
+@media (min-width: 768px) {
+  ion-content::part(scroll) {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ion-toolbar {
+    --padding-start: max(16px, calc((100% - 1000px) / 2));
+    --padding-end: max(16px, calc((100% - 1000px) / 2));
+  }
+
+  /* Modais deixam de ser tela cheia e passam a se comportar como uma janela
+     de dialogo centralizada, mais proximo do padrao de aplicacoes web/desktop.
+     "--height: auto" nao funciona aqui: sem uma altura definida, o ion-content
+     interno fica sem espaco para se expandir e o modal encolhe ate soh o cabecalho. */
+  ion-modal {
+    --width: 560px;
+    --height: 85vh;
+    --max-height: 85vh;
+    --border-radius: var(--app-radius-lg);
+    --box-shadow: var(--app-shadow-lg);
+  }
+}

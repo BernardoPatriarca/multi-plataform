@@ -1,0 +1,7 @@
+{
+  "name": "sistema-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

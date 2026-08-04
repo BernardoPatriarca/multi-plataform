@@ -1,0 +1,92 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="hero-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="hero-toolbar">
+    <ion-searchbar
+      [formControl]="searchControl"
+      placeholder="Buscar por nome ou login"
+      debounce="0"
+      class="custom-searchbar"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="list-summary" *ngIf="!loading">
+    {{ totalElements }} {{ totalElements === 1 ? 'usuario encontrado' : 'usuarios encontrados' }}
+  </div>
+
+  <div class="loading-wrapper" *ngIf="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && usuarios.length === 0">
+    <ion-icon name="people-outline"></ion-icon>
+    <p>Nenhum usuario encontrado.</p>
+  </div>
+
+  <div class="usuarios-grid" *ngIf="!loading && usuarios.length > 0">
+    <div class="usuario-card fade-in-item" *ngFor="let usuario of usuarios">
+      <div class="usuario-card-top">
+        <div class="avatar-initials" [class.inactive]="!usuario.ativo">{{ iniciais(usuario.nome) }}</div>
+        <div class="usuario-main-info">
+          <h2>{{ usuario.nome }}</h2>
+          <p class="login-line"><ion-icon name="at-outline"></ion-icon>{{ usuario.login }}</p>
+        </div>
+        <ion-badge [color]="usuario.ativo ? 'success' : 'medium'" class="status-badge">
+          {{ usuario.ativo ? 'Ativo' : 'Inativo' }}
+        </ion-badge>
+      </div>
+
+      <div class="usuario-card-details">
+        <div class="detail-row" *ngIf="usuario.email">
+          <ion-icon name="mail-outline"></ion-icon>
+          <span>{{ usuario.email }}</span>
+        </div>
+        <div class="detail-row">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Criado em {{ usuario.dataCriacao | date: 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="detail-row" *ngIf="usuario.dataAtualizacao">
+          <ion-icon name="refresh-outline"></ion-icon>
+          <span>Atualizado em {{ usuario.dataAtualizacao | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      </div>
+
+      <div class="usuario-card-actions">
+        <ion-button fill="clear" size="small" (click)="openForm(usuario)">
+          <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+          Editar
+        </ion-button>
+        <ion-button fill="clear" size="small" color="danger" (click)="confirmDelete(usuario)">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
+          Excluir
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="!loading && totalPages > 1">
+    <ion-button fill="clear" [disabled]="page === 0" (click)="prevPage()">
+      <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <span>Pagina {{ page + 1 }} de {{ totalPages }}</span>
+    <ion-button fill="clear" [disabled]="page + 1 >= totalPages" (click)="nextPage()">
+      <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openForm(null)" class="gradient-fab">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

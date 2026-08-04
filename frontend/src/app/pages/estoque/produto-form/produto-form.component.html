@@ -1,0 +1,122 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="form-toolbar">
+    <ion-title>{{ isEdit ? 'Editar produto' : 'Novo produto' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <p class="section-label">Identificacao</p>
+
+    <ion-grid class="form-grid">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item fill="outline">
+            <ion-icon name="cube-outline" slot="start" color="medium"></ion-icon>
+            <ion-input label="Nome do produto" labelPlacement="floating" formControlName="nome" type="text"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="f.nome.touched && f.nome.invalid">Informe o nome do produto.</div>
+        </ion-col>
+
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Codigo" labelPlacement="floating" formControlName="codigo" type="text"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="f.codigo.touched && f.codigo.invalid">Informe o codigo.</div>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Codigo de barras" labelPlacement="floating" formControlName="codigoBarras" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Categoria" labelPlacement="floating" formControlName="categoria" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-select label="Unidade de medida" labelPlacement="floating" formControlName="unidadeMedida" interface="popover">
+              <ion-select-option *ngFor="let u of unidades" [value]="u.value">{{ u.label }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item fill="outline">
+            <ion-textarea label="Descricao" labelPlacement="floating" formControlName="descricao" autoGrow="true"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <p class="section-label">Precos e estoque</p>
+
+    <ion-grid class="form-grid">
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Preco de custo (R$)" labelPlacement="floating" formControlName="precoCusto" type="number" step="0.01"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="f.precoCusto.touched && f.precoCusto.invalid">Informe um valor valido.</div>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Preco de venda (R$)" labelPlacement="floating" formControlName="precoVenda" type="number" step="0.01"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="f.precoVenda.touched && f.precoVenda.invalid">Informe um valor valido.</div>
+        </ion-col>
+
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Quantidade em estoque" labelPlacement="floating" formControlName="quantidadeEstoque" type="number" step="0.001"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="f.quantidadeEstoque.touched && f.quantidadeEstoque.invalid">Informe a quantidade.</div>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Estoque minimo" labelPlacement="floating" formControlName="estoqueMinimo" type="number" step="0.001"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="f.estoqueMinimo.touched && f.estoqueMinimo.invalid">Informe o estoque minimo.</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <p class="section-label">Fornecimento</p>
+
+    <ion-grid class="form-grid">
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Fornecedor" labelPlacement="floating" formControlName="fornecedor" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item fill="outline">
+            <ion-input label="Localizacao (prateleira)" labelPlacement="floating" formControlName="localizacao" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item class="ion-margin-top" lines="none">
+      <ion-icon name="cube-outline" slot="start" [color]="f.ativo.value ? 'success' : 'medium'"></ion-icon>
+      <ion-label>Produto ativo</ion-label>
+      <ion-toggle formControlName="ativo" slot="end"></ion-toggle>
+    </ion-item>
+
+    <p class="form-error banner" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top submit-btn" [disabled]="loading">
+      <ion-spinner *ngIf="loading" name="crescent" slot="start"></ion-spinner>
+      <ion-icon *ngIf="!loading" name="save-outline" slot="start"></ion-icon>
+      Salvar
+    </ion-button>
+  </form>
+</ion-content>

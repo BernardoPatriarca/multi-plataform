@@ -1,0 +1,62 @@
+# ================= Java / Maven (backend) =================
+backend/target/
+backend/**/target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/maven-wrapper.jar
+backend/HELP.md
+
+# ================= Node / Angular / Ionic (frontend) =================
+frontend/node_modules/
+frontend/dist/
+frontend/www/
+frontend/.angular/
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage/
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/testem.log
+frontend/typings/
+
+# ================= Capacitor (android / ios build artifacts) =================
+frontend/android/app/build/
+frontend/android/.gradle/
+frontend/android/local.properties
+frontend/android/capacitor-cordova-android-plugins/
+frontend/android/app/src/main/assets/public/
+frontend/android/app/src/main/assets/capacitor.config.json
+frontend/android/app/src/main/assets/capacitor.plugins.json
+
+frontend/ios/App/Pods/
+frontend/ios/App/build/
+frontend/ios/App/App/public/
+frontend/ios/App/App/capacitor.config.json
+frontend/ios/App/App/capacitor.plugins.json
+frontend/ios/.xcode.env.local
+
+# ================= IDE =================
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+*.launch
+
+# ================= Ambiente / segredos =================
+.env
+.env.*
+!.env.example
+backend/src/main/resources/application-local.yml
+backend/src/main/resources/application-local.properties
+
+# ================= Sistema Operacional =================
+.DS_Store
+Thumbs.db
+desktop.ini

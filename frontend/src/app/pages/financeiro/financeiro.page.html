@@ -1,0 +1,132 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="hero-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Financeiro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="resumo-row" *ngIf="resumo">
+    <div class="resumo-card receita">
+      <ion-icon name="trending-up-outline"></ion-icon>
+      <div>
+        <p>Receitas</p>
+        <h3>{{ formatarMoeda(resumo.totalReceitas) }}</h3>
+      </div>
+    </div>
+    <div class="resumo-card despesa">
+      <ion-icon name="trending-down-outline"></ion-icon>
+      <div>
+        <p>Despesas</p>
+        <h3>{{ formatarMoeda(resumo.totalDespesas) }}</h3>
+      </div>
+    </div>
+    <div class="resumo-card saldo">
+      <ion-icon name="wallet-outline"></ion-icon>
+      <div>
+        <p>Saldo</p>
+        <h3>{{ formatarMoeda(resumo.saldo) }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <ion-segment [value]="filtroTipo" (ionChange)="filtrarTipo($event.detail.value)" class="tipo-filter">
+    <ion-segment-button value="">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="RECEITA">
+      <ion-label>Receitas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="DESPESA">
+      <ion-label>Despesas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-searchbar
+    [formControl]="searchControl"
+    placeholder="Buscar por descricao ou categoria"
+    debounce="0"
+    class="local-searchbar"
+  ></ion-searchbar>
+
+  <div class="list-summary" *ngIf="!loading">
+    {{ totalElements }} {{ totalElements === 1 ? 'lancamento encontrado' : 'lancamentos encontrados' }}
+  </div>
+
+  <div class="loading-wrapper" *ngIf="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && lancamentos.length === 0">
+    <ion-icon name="wallet-outline"></ion-icon>
+    <p>Nenhum lancamento encontrado.</p>
+  </div>
+
+  <div class="lancamentos-grid" *ngIf="!loading && lancamentos.length > 0">
+    <div class="lancamento-card fade-in-item" *ngFor="let lancamento of lancamentos">
+      <div class="lancamento-card-top">
+        <div class="lancamento-icon" [class.despesa]="lancamento.tipo === 'DESPESA'">
+          <ion-icon [name]="lancamento.tipo === 'RECEITA' ? 'trending-up-outline' : 'trending-down-outline'"></ion-icon>
+        </div>
+        <div class="lancamento-main-info">
+          <h2>{{ lancamento.descricao }}</h2>
+          <p class="categoria-line" *ngIf="lancamento.categoria">{{ lancamento.categoria }}</p>
+        </div>
+        <div class="valor-col">
+          <span class="valor" [class.despesa]="lancamento.tipo === 'DESPESA'">
+            {{ lancamento.tipo === 'DESPESA' ? '-' : '+' }}{{ formatarMoeda(lancamento.valor) }}
+          </span>
+          <ion-badge [color]="corStatus(lancamento.status)" class="status-badge">{{ lancamento.status }}</ion-badge>
+        </div>
+      </div>
+
+      <div class="lancamento-card-details">
+        <div class="detail-row" *ngIf="lancamento.dataVencimento">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Vencimento: {{ lancamento.dataVencimento | date: 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="detail-row" *ngIf="lancamento.dataPagamento">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Pago em: {{ lancamento.dataPagamento | date: 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="detail-row" *ngIf="lancamento.formaPagamento">
+          <ion-icon name="card-outline"></ion-icon>
+          <span>{{ lancamento.formaPagamento }}</span>
+        </div>
+      </div>
+
+      <div class="lancamento-card-actions">
+        <ion-button fill="clear" size="small" (click)="openForm(lancamento)">
+          <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+          Editar
+        </ion-button>
+        <ion-button fill="clear" size="small" color="danger" (click)="confirmDelete(lancamento)">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
+          Excluir
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="!loading && totalPages > 1">
+    <ion-button fill="clear" [disabled]="page === 0" (click)="prevPage()">
+      <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <span>Pagina {{ page + 1 }} de {{ totalPages }}</span>
+    <ion-button fill="clear" [disabled]="page + 1 >= totalPages" (click)="nextPage()">
+      <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openForm(null)" class="gradient-fab">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
