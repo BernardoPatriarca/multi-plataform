@@ -153,7 +153,7 @@ Abre em `http://localhost:8100` (ou `ng serve` → `http://localhost:4200`).
 ```bash
 cd frontend
 ionic build
-npx cap add android     # ou ios — só na primeira vez
+npx cap add android     # ou ios —> só na primeira vez
 npx cap sync
 npx cap open android    # abre no Android Studio (ou "open ios" no Xcode)
 ```
