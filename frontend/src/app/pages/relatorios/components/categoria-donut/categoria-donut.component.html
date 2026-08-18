@@ -1,0 +1,30 @@
+<div class="donut-wrap" *ngIf="segmentos.length">
+  <svg viewBox="0 0 140 140" class="donut-svg">
+    <circle class="donut-track" cx="70" cy="70" [attr.r]="raio" fill="none" stroke-width="18"></circle>
+    <circle
+      *ngFor="let seg of segmentos"
+      class="donut-segment"
+      cx="70" cy="70" [attr.r]="raio" fill="none" stroke-width="18"
+      [attr.stroke]="seg.cor"
+      [attr.stroke-dasharray]="seg.dasharray"
+      [attr.stroke-dashoffset]="seg.dashoffset"
+    >
+      <title>{{ seg.categoria }}: {{ formatarMoeda(seg.valor) }} ({{ seg.percentual | number: '1.0-1' }}%)</title>
+    </circle>
+  </svg>
+
+  <div class="donut-center">
+    <span class="donut-total">{{ formatarMoeda(total) }}</span>
+    <span class="donut-total-label">Total</span>
+  </div>
+</div>
+
+<ul class="donut-legend" *ngIf="segmentos.length">
+  <li *ngFor="let seg of segmentos">
+    <i class="dot" [style.background]="seg.cor"></i>
+    <span class="legend-label">{{ seg.categoria }}</span>
+    <span class="legend-value">{{ seg.percentual | number: '1.0-0' }}%</span>
+  </li>
+</ul>
+
+<div class="empty-chart" *ngIf="!segmentos.length">{{ vazio }}</div>

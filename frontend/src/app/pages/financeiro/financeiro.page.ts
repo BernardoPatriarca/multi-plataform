@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import {
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonButton, IonIcon,
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
   IonContent, IonSearchbar, IonBadge, IonFab, IonFabButton, IonSpinner,
   IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonLabel,
   ModalController, AlertController, ToastController
@@ -11,11 +12,14 @@ import {
 import { addIcons } from 'ionicons';
 import {
   addOutline, createOutline, trashOutline, chevronBackOutline, chevronForwardOutline,
-  trendingUpOutline, trendingDownOutline, walletOutline, calendarOutline, cardOutline
+  trendingUpOutline, trendingDownOutline, walletOutline, calendarOutline, cardOutline,
+  moonOutline, sunnyOutline, logOutOutline
 } from 'ionicons/icons';
 import { Lancamento, ResumoFinanceiro } from '../../core/models/lancamento.model';
 import { LancamentoService } from '../../core/services/lancamento.service';
 import { LancamentoFormComponent } from './lancamento-form/lancamento-form.component';
+import { AuthService } from '../../core/services/auth.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-financeiro',
@@ -24,16 +28,19 @@ import { LancamentoFormComponent } from './lancamento-form/lancamento-form.compo
   styleUrls: ['./financeiro.page.scss'],
   imports: [
     CommonModule, ReactiveFormsModule,
-    IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonButton, IonIcon,
+    IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
     IonContent, IonSearchbar, IonBadge, IonFab, IonFabButton, IonSpinner,
     IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonLabel
   ]
 })
 export class FinanceiroPage implements OnInit {
+  authService = inject(AuthService);
+  themeService = inject(ThemeService);
   private lancamentoService = inject(LancamentoService);
   private modalController = inject(ModalController);
   private alertController = inject(AlertController);
   private toastController = inject(ToastController);
+  private router = inject(Router);
 
   lancamentos: Lancamento[] = [];
   resumo: ResumoFinanceiro | null = null;
@@ -50,8 +57,19 @@ export class FinanceiroPage implements OnInit {
   constructor() {
     addIcons({
       addOutline, createOutline, trashOutline, chevronBackOutline, chevronForwardOutline,
-      trendingUpOutline, trendingDownOutline, walletOutline, calendarOutline, cardOutline
+      trendingUpOutline, trendingDownOutline, walletOutline, calendarOutline, cardOutline,
+      moonOutline, sunnyOutline, logOutOutline
     });
+  }
+
+
+  toggleTheme(): void {
+    this.themeService.toggle();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import {
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonButton, IonIcon,
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
   IonContent, IonSearchbar, IonList, IonItem, IonLabel, IonBadge, IonFab, IonFabButton,
   IonSpinner, IonRefresher, IonRefresherContent,
   ModalController, AlertController, ToastController
@@ -12,11 +12,14 @@ import {
 import { addIcons } from 'ionicons';
 import {
   addOutline, createOutline, trashOutline, chevronBackOutline, chevronForwardOutline,
-  atOutline, mailOutline, calendarOutline, refreshOutline, peopleOutline
+  atOutline, mailOutline, calendarOutline, refreshOutline, peopleOutline,
+  moonOutline, sunnyOutline, logOutOutline
 } from 'ionicons/icons';
 import { Usuario } from '../../core/models/usuario.model';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
+import { AuthService } from '../../core/services/auth.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -25,12 +28,14 @@ import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
   styleUrls: ['./usuarios.page.scss'],
   imports: [
     CommonModule, ReactiveFormsModule,
-    IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonButton, IonIcon,
+    IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
     IonContent, IonSearchbar, IonList, IonItem, IonLabel, IonBadge, IonFab, IonFabButton,
     IonSpinner, IonRefresher, IonRefresherContent
   ]
 })
 export class UsuariosPage implements OnInit {
+  authService = inject(AuthService);
+  themeService = inject(ThemeService);
   private usuarioService = inject(UsuarioService);
   private modalController = inject(ModalController);
   private alertController = inject(AlertController);
@@ -50,8 +55,18 @@ export class UsuariosPage implements OnInit {
   constructor() {
     addIcons({
       addOutline, createOutline, trashOutline, chevronBackOutline, chevronForwardOutline,
-      atOutline, mailOutline, calendarOutline, refreshOutline, peopleOutline
+      atOutline, mailOutline, calendarOutline, refreshOutline, peopleOutline,
+      moonOutline, sunnyOutline, logOutOutline
     });
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggle();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   iniciais(nome: string): string {

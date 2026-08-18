@@ -54,7 +54,7 @@ export class LoginPage {
     this.authService.login(this.form.getRawValue()).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/tabs/home']);
       },
       error: (err) => {
         this.loading = false;

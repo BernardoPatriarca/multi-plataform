@@ -49,6 +49,19 @@
       </div>
     </div>
 
+    <div class="alerts-row" *ngIf="(estoqueBaixo ?? 0) > 0 || (aVencer ?? 0) > 0">
+      <div class="alert-chip" *ngIf="(estoqueBaixo ?? 0) > 0" (click)="goTo('/tabs/relatorios')">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <span>{{ estoqueBaixo }} {{ estoqueBaixo === 1 ? 'produto' : 'produtos' }} com estoque baixo</span>
+        <ion-icon name="chevron-forward-outline" class="chip-arrow"></ion-icon>
+      </div>
+      <div class="alert-chip prazo" *ngIf="(aVencer ?? 0) > 0" (click)="goTo('/tabs/financeiro')">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>{{ aVencer }} {{ aVencer === 1 ? 'conta a vencer' : 'contas a vencer' }} em 7 dias</span>
+        <ion-icon name="chevron-forward-outline" class="chip-arrow"></ion-icon>
+      </div>
+    </div>
+
     <h3 class="section-title">Menu</h3>
 
     <div class="menu-tile fade-in-item" *ngFor="let tile of menuTiles" [ngClass]="tile.classe" (click)="goTo(tile.rota)">

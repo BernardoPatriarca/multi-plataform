@@ -1,26 +1,26 @@
-/* Paleta de cores do sistema - moderna, com tons de indigo/azul */
+/* Paleta de cores do sistema - moderna, com tons de ciano/azul/violeta */
 
 :root {
-  --ion-color-primary: #4f46e5;
-  --ion-color-primary-rgb: 79, 70, 229;
+  --ion-color-primary: #3b82f6;
+  --ion-color-primary-rgb: 59, 130, 246;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #463ecb;
-  --ion-color-primary-tint: #6159e9;
+  --ion-color-primary-shade: #2563eb;
+  --ion-color-primary-tint: #60a5fa;
 
-  --ion-color-secondary: #0ea5e9;
-  --ion-color-secondary-rgb: 14, 165, 233;
+  --ion-color-secondary: #06b6d4;
+  --ion-color-secondary-rgb: 6, 182, 212;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #0c91cd;
-  --ion-color-secondary-tint: #26aeeb;
+  --ion-color-secondary-shade: #0891b2;
+  --ion-color-secondary-tint: #22d3ee;
 
-  --ion-color-tertiary: #d946ef;
-  --ion-color-tertiary-rgb: 217, 70, 239;
+  --ion-color-tertiary: #8b5cf6;
+  --ion-color-tertiary-rgb: 139, 92, 246;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #bf3ed3;
-  --ion-color-tertiary-tint: #dd59f1;
+  --ion-color-tertiary-shade: #7c3aed;
+  --ion-color-tertiary-tint: #a78bfa;
 
   --ion-color-success: #22c55e;
   --ion-color-success-rgb: 34, 197, 94;
@@ -70,16 +70,16 @@
   --ion-item-background: #ffffff;
 
   /* Design tokens - gradientes e superficies */
-  --app-gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #d946ef 100%);
-  --app-gradient-hero: linear-gradient(160deg, #4338ca 0%, #6d28d9 45%, #c026d3 100%);
-  --app-gradient-cool: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%);
-  --app-gradient-success: linear-gradient(135deg, #22c55e 0%, #0ea5e9 100%);
+  --app-gradient-primary: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+  --app-gradient-hero: linear-gradient(160deg, #0e7490 0%, #2563eb 45%, #7c3aed 100%);
+  --app-gradient-cool: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --app-gradient-success: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
   --app-gradient-card: linear-gradient(145deg, #ffffff 0%, #f7f7fd 100%);
 
-  --app-shadow-sm: 0 2px 8px rgba(30, 27, 75, 0.06);
-  --app-shadow-md: 0 8px 24px rgba(30, 27, 75, 0.10);
-  --app-shadow-lg: 0 20px 45px rgba(30, 27, 75, 0.18);
-  --app-shadow-glow: 0 8px 30px rgba(124, 58, 237, 0.35);
+  --app-shadow-sm: 0 2px 8px rgba(30, 41, 59, 0.06);
+  --app-shadow-md: 0 8px 24px rgba(30, 41, 59, 0.10);
+  --app-shadow-lg: 0 20px 45px rgba(30, 41, 59, 0.18);
+  --app-shadow-glow: 0 8px 30px rgba(59, 130, 246, 0.35);
 
   --app-radius-sm: 12px;
   --app-radius-md: 18px;
@@ -88,22 +88,22 @@
 
 /* Tema escuro - ativado via classe .dark no <body> (ThemeService) */
 body.dark {
-  --ion-background-color: #0f0b1f;
-  --ion-toolbar-background: #171130;
-  --ion-item-background: #1b1533;
+  --ion-background-color: #1a1730;
+  --ion-toolbar-background: #221f42;
+  --ion-item-background: #262247;
   --ion-text-color: #f1f0f8;
-  --ion-border-color: #2b234a;
-  --ion-color-light: #201a3d;
-  --ion-color-light-rgb: 32, 26, 61;
+  --ion-border-color: #3a3560;
+  --ion-color-light: #2c2850;
+  --ion-color-light-rgb: 44, 40, 80;
   --ion-color-light-contrast: #f1f0f8;
   --ion-color-light-contrast-rgb: 241, 240, 248;
-  --ion-color-light-shade: #1c1736;
-  --ion-color-light-tint: #362f56;
-  --ion-color-medium: #a29bc4;
-  --ion-color-medium-rgb: 162, 155, 196;
+  --ion-color-light-shade: #272349;
+  --ion-color-light-tint: #403a68;
+  --ion-color-medium: #a8a2c9;
+  --ion-color-medium-rgb: 168, 162, 201;
 
-  --app-gradient-card: linear-gradient(145deg, #1b1533 0%, #150f29 100%);
-  --app-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
-  --app-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --app-shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.5);
+  --app-gradient-card: linear-gradient(145deg, #262247 0%, #201c3f 100%);
+  --app-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --app-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --app-shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.45);
 }

@@ -1,0 +1,95 @@
+.donut-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donut-track {
+  stroke: var(--ion-color-light-shade, #e5e7eb);
+  opacity: 0.5;
+}
+
+.donut-segment {
+  transition: stroke-dasharray 0.4s ease;
+  stroke-linecap: round;
+}
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-total {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ion-text-color);
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.donut-total-label {
+  font-size: 0.6rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.donut-legend {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.donut-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ion-text-color);
+}
+
+.legend-value {
+  color: var(--ion-color-medium);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.empty-chart {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--ion-color-medium);
+  font-size: 0.85rem;
+}

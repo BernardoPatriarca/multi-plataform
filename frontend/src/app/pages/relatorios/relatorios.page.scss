@@ -1,0 +1,182 @@
+.hero-toolbar.relatorios-toolbar {
+  --background: #7c3aed;
+  --color: #fff;
+  --border-width: 0 !important;
+}
+
+.loading-wrapper {
+  padding: 8px 0;
+}
+
+.relatorios-content {
+  padding: 16px 16px 40px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.kpi-card ion-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.kpi-card.saldo ion-icon { color: var(--ion-color-primary); }
+.kpi-card.receita ion-icon { color: var(--ion-color-success); }
+.kpi-card.despesa ion-icon { color: var(--ion-color-danger); }
+.kpi-card.estoque ion-icon { color: var(--ion-color-secondary); }
+.kpi-card.alerta ion-icon,
+.kpi-card.prazo ion-icon { color: var(--ion-color-warning); }
+
+.kpi-card.destaque {
+  box-shadow: 0 0 0 1.5px var(--ion-color-warning), var(--app-shadow-md);
+}
+
+.kpi-card p {
+  margin: 0;
+  font-size: 0.68rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.kpi-card h3 {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ion-color-medium);
+  margin: 0 4px 12px;
+}
+
+.report-section {
+  margin-bottom: 26px;
+}
+
+.report-card {
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+  padding: 18px 12px;
+}
+
+.report-card-label {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ion-color-medium);
+  text-align: center;
+}
+
+.donut-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.baixo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.baixo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--app-gradient-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-sm);
+  padding: 12px 14px;
+}
+
+.baixo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.baixo-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.baixo-info h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.baixo-info p {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  color: var(--ion-color-medium);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.baixo-qtd {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.baixo-qtd span {
+  display: block;
+  font-weight: 700;
+  color: var(--ion-color-warning-shade, var(--ion-color-warning));
+  font-size: 0.85rem;
+}
+
+.baixo-qtd small {
+  color: var(--ion-color-medium);
+  font-size: 0.68rem;
+}
+
+@media (min-width: 768px) {
+  .kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .donut-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,5 +1,5 @@
 .hero-toolbar {
-  --background: #4338ca;
+  --background: #2563eb;
   --color: #fff;
   --border-width: 0 !important;
 }
@@ -109,6 +109,56 @@
   color: var(--ion-color-medium);
 }
 
+.alerts-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.alert-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(239, 68, 68, 0.14) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--app-radius-md);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.alert-chip:active {
+  transform: scale(0.98);
+}
+
+.alert-chip > ion-icon:first-child {
+  font-size: 20px;
+  color: var(--ion-color-warning);
+  flex-shrink: 0;
+}
+
+.alert-chip.prazo {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.14) 0%, rgba(79, 70, 229, 0.14) 100%);
+  border-color: rgba(14, 165, 233, 0.35);
+}
+
+.alert-chip.prazo > ion-icon:first-child {
+  color: var(--ion-color-secondary);
+}
+
+.alert-chip span {
+  flex: 1;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.chip-arrow {
+  font-size: 16px;
+  color: var(--ion-color-medium);
+  flex-shrink: 0;
+}
+
 .section-title {
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -160,6 +210,10 @@
 
 .tile-financeiro .menu-tile-icon {
   background: var(--app-gradient-success);
+}
+
+.tile-relatorios .menu-tile-icon {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
 }
 
 .menu-tile-info {

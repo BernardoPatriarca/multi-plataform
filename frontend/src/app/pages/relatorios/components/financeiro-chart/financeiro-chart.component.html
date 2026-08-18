@@ -1,0 +1,29 @@
+<div class="chart-wrap" *ngIf="data.length; else vazioTpl">
+  <svg [attr.viewBox]="'0 0 ' + width + ' ' + height" preserveAspectRatio="xMidYMid meet" class="chart-svg">
+    <line
+      *ngFor="let gy of gridLines"
+      [attr.x1]="8" [attr.x2]="width - 8"
+      [attr.y1]="gy" [attr.y2]="gy"
+      class="grid-line"
+    ></line>
+
+    <g *ngFor="let bar of bars">
+      <rect class="bar receita" [attr.x]="bar.xReceita" [attr.y]="bar.yReceita" [attr.width]="barWidth" [attr.height]="bar.hReceita" rx="4">
+        <title>Receitas: {{ formatarMoeda(bar.valorReceita) }}</title>
+      </rect>
+      <rect class="bar despesa" [attr.x]="bar.xDespesa" [attr.y]="bar.yDespesa" [attr.width]="barWidth" [attr.height]="bar.hDespesa" rx="4">
+        <title>Despesas: {{ formatarMoeda(bar.valorDespesa) }}</title>
+      </rect>
+      <text class="axis-label" [attr.x]="bar.xLabel" [attr.y]="height - 6" text-anchor="middle">{{ bar.label }}</text>
+    </g>
+  </svg>
+
+  <div class="chart-legend">
+    <span class="legend-item"><i class="dot receita"></i>Receitas</span>
+    <span class="legend-item"><i class="dot despesa"></i>Despesas</span>
+  </div>
+</div>
+
+<ng-template #vazioTpl>
+  <div class="empty-chart">Sem dados suficientes para exibir o grafico.</div>
+</ng-template>

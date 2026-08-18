@@ -1,0 +1,125 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="hero-toolbar relatorios-toolbar">
+    <ion-title>Relatorios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleTheme()">
+        <ion-icon [name]="themeService.isDark() ? 'sunny-outline' : 'moon-outline'" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="loading-wrapper" *ngIf="loading">
+    <ion-skeleton-text animated style="width: 90%; height: 90px; margin: 16px auto; border-radius: 18px;"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 90%; height: 220px; margin: 16px auto; border-radius: 18px;"></ion-skeleton-text>
+  </div>
+
+  <div class="relatorios-content" *ngIf="!loading && dashboard as d">
+    <div class="kpi-grid">
+      <div class="kpi-card fade-in-item saldo">
+        <ion-icon name="wallet-outline"></ion-icon>
+        <div>
+          <p>Saldo</p>
+          <h3>{{ formatarMoeda(d.saldo) }}</h3>
+        </div>
+      </div>
+      <div class="kpi-card fade-in-item receita">
+        <ion-icon name="trending-up-outline"></ion-icon>
+        <div>
+          <p>Receitas</p>
+          <h3>{{ formatarMoeda(d.totalReceitas) }}</h3>
+        </div>
+      </div>
+      <div class="kpi-card fade-in-item despesa">
+        <ion-icon name="trending-down-outline"></ion-icon>
+        <div>
+          <p>Despesas</p>
+          <h3>{{ formatarMoeda(d.totalDespesas) }}</h3>
+        </div>
+      </div>
+      <div class="kpi-card fade-in-item estoque">
+        <ion-icon name="cube-outline"></ion-icon>
+        <div>
+          <p>Valor em estoque</p>
+          <h3>{{ formatarMoeda(d.valorTotalEstoque) }}</h3>
+        </div>
+      </div>
+      <div class="kpi-card fade-in-item alerta" [class.destaque]="d.totalProdutosEstoqueBaixo > 0">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <div>
+          <p>Estoque baixo</p>
+          <h3>{{ d.totalProdutosEstoqueBaixo }}</h3>
+        </div>
+      </div>
+      <div class="kpi-card fade-in-item prazo" [class.destaque]="d.lancamentosAVencer > 0">
+        <ion-icon name="time-outline"></ion-icon>
+        <div>
+          <p>A vencer (7 dias)</p>
+          <h3>{{ d.lancamentosAVencer }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <section class="report-section fade-in-item">
+      <h3 class="section-title">Financeiro - ultimos 6 meses</h3>
+      <div class="report-card">
+        <app-financeiro-chart [data]="d.financeiroMensal"></app-financeiro-chart>
+      </div>
+    </section>
+
+    <section class="report-section fade-in-item">
+      <h3 class="section-title">Distribuicao financeira por categoria</h3>
+      <div class="donut-grid">
+        <div class="report-card">
+          <p class="report-card-label">Despesas</p>
+          <app-categoria-donut [data]="d.despesasPorCategoria" vazio="Sem despesas categorizadas."></app-categoria-donut>
+        </div>
+        <div class="report-card">
+          <p class="report-card-label">Receitas</p>
+          <app-categoria-donut [data]="d.receitasPorCategoria" vazio="Sem receitas categorizadas."></app-categoria-donut>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-section fade-in-item">
+      <h3 class="section-title">Estoque por categoria</h3>
+      <div class="report-card">
+        <app-categoria-donut [data]="d.estoquePorCategoria" vazio="Nenhum produto cadastrado."></app-categoria-donut>
+      </div>
+    </section>
+
+    <section class="report-section fade-in-item" *ngIf="d.produtosEstoqueBaixo.length">
+      <h3 class="section-title">Produtos com estoque baixo</h3>
+      <div class="baixo-lista">
+        <div class="baixo-item" *ngFor="let p of d.produtosEstoqueBaixo">
+          <div class="baixo-icon"><ion-icon name="alert-circle-outline"></ion-icon></div>
+          <div class="baixo-info">
+            <h4>{{ p.nome }}</h4>
+            <p><ion-icon name="pricetag-outline"></ion-icon>{{ p.codigo }} &middot; {{ p.categoria || 'Sem categoria' }}</p>
+          </div>
+          <div class="baixo-qtd">
+            <span>{{ p.quantidadeEstoque }} {{ p.unidadeMedida }}</span>
+            <small>min. {{ p.estoqueMinimo }}</small>
+          </div>
+        </div>
+      </div>
+      <ion-button expand="block" fill="clear" (click)="verEstoque()">
+        Ver estoque completo
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-button>
+    </section>
+
+    <div class="empty-state" *ngIf="!d.produtosEstoqueBaixo.length">
+      <ion-icon name="cube-outline"></ion-icon>
+      <p>Nenhum produto com estoque baixo no momento.</p>
+    </div>
+  </div>
+</ion-content>

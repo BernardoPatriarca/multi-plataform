@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import {
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonButton, IonIcon,
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
   IonContent, IonSearchbar, IonBadge, IonFab, IonFabButton, IonSpinner,
   IonRefresher, IonRefresherContent,
   ModalController, AlertController, ToastController
@@ -11,11 +12,14 @@ import {
 import { addIcons } from 'ionicons';
 import {
   addOutline, createOutline, trashOutline, chevronBackOutline, chevronForwardOutline,
-  cubeOutline, pricetagOutline, alertCircleOutline, businessOutline, locationOutline
+  cubeOutline, pricetagOutline, alertCircleOutline, businessOutline, locationOutline,
+  moonOutline, sunnyOutline, logOutOutline
 } from 'ionicons/icons';
 import { Produto } from '../../core/models/produto.model';
 import { ProdutoService } from '../../core/services/produto.service';
 import { ProdutoFormComponent } from './produto-form/produto-form.component';
+import { AuthService } from '../../core/services/auth.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-estoque',
@@ -24,16 +28,19 @@ import { ProdutoFormComponent } from './produto-form/produto-form.component';
   styleUrls: ['./estoque.page.scss'],
   imports: [
     CommonModule, ReactiveFormsModule,
-    IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonButton, IonIcon,
+    IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon,
     IonContent, IonSearchbar, IonBadge, IonFab, IonFabButton, IonSpinner,
     IonRefresher, IonRefresherContent
   ]
 })
 export class EstoquePage implements OnInit {
+  authService = inject(AuthService);
+  themeService = inject(ThemeService);
   private produtoService = inject(ProdutoService);
   private modalController = inject(ModalController);
   private alertController = inject(AlertController);
   private toastController = inject(ToastController);
+  private router = inject(Router);
 
   produtos: Produto[] = [];
   loading = false;
@@ -48,8 +55,18 @@ export class EstoquePage implements OnInit {
   constructor() {
     addIcons({
       addOutline, createOutline, trashOutline, chevronBackOutline, chevronForwardOutline,
-      cubeOutline, pricetagOutline, alertCircleOutline, businessOutline, locationOutline
+      cubeOutline, pricetagOutline, alertCircleOutline, businessOutline, locationOutline,
+      moonOutline, sunnyOutline, logOutOutline
     });
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggle();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

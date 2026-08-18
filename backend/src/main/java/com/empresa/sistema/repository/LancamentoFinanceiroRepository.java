@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
 public interface LancamentoFinanceiroRepository extends JpaRepository<LancamentoFinanceiro, Long> {
 
@@ -31,4 +33,18 @@ public interface LancamentoFinanceiroRepository extends JpaRepository<Lancamento
             "WHERE l.tipo = com.empresa.sistema.entity.TipoLancamento.DESPESA " +
             "AND l.status <> com.empresa.sistema.entity.StatusLancamento.CANCELADO")
     BigDecimal sumDespesas();
+
+    long countByStatus(StatusLancamento status);
+
+    long countByStatusAndDataVencimentoBetween(StatusLancamento status, LocalDate inicio, LocalDate fim);
+
+    @Query("SELECT l FROM LancamentoFinanceiro l WHERE " +
+            "l.status <> com.empresa.sistema.entity.StatusLancamento.CANCELADO AND l.dataVencimento >= :inicio")
+    List<LancamentoFinanceiro> findParaRelatorioMensal(@Param("inicio") LocalDate inicio);
+
+    @Query("SELECT COALESCE(l.categoria, 'Sem categoria') as categoria, COALESCE(SUM(l.valor), 0) as total " +
+            "FROM LancamentoFinanceiro l WHERE l.tipo = :tipo " +
+            "AND l.status <> com.empresa.sistema.entity.StatusLancamento.CANCELADO " +
+            "GROUP BY l.categoria ORDER BY SUM(l.valor) DESC")
+    List<CategoriaTotalProjection> sumPorCategoria(@Param("tipo") TipoLancamento tipo);
 }

@@ -9,12 +9,10 @@ import { addIcons } from 'ionicons';
 import {
   logOutOutline, peopleOutline, chevronForwardOutline, personCircleOutline,
   checkmarkCircleOutline, sparklesOutline, cubeOutline, walletOutline,
-  moonOutline, sunnyOutline
+  moonOutline, sunnyOutline, barChartOutline, alertCircleOutline, timeOutline
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
-import { UsuarioService } from '../../core/services/usuario.service';
-import { ProdutoService } from '../../core/services/produto.service';
-import { LancamentoService } from '../../core/services/lancamento.service';
+import { RelatorioService } from '../../core/services/relatorio.service';
 import { ThemeService } from '../../core/services/theme.service';
 
 interface MenuTile {
@@ -39,37 +37,43 @@ interface MenuTile {
 export class HomePage implements OnInit {
   authService = inject(AuthService);
   themeService = inject(ThemeService);
-  private usuarioService = inject(UsuarioService);
-  private produtoService = inject(ProdutoService);
-  private lancamentoService = inject(LancamentoService);
+  private relatorioService = inject(RelatorioService);
   private router = inject(Router);
 
   totalUsuarios: number | null = null;
   totalProdutos: number | null = null;
   saldoFinanceiro: number | null = null;
-  loadingStats = true;
+  estoqueBaixo: number | null = null;
+  aVencer: number | null = null;
 
   menuTiles: MenuTile[] = [
     {
-      titulo: 'Usuarios',
-      descricao: 'Gerencie contas, permissoes e dados cadastrais',
-      icone: 'people-outline',
-      rota: '/usuarios',
-      classe: 'tile-usuarios'
+      titulo: 'Financeiro',
+      descricao: 'Receitas, despesas e saldo em um so lugar',
+      icone: 'wallet-outline',
+      rota: '/tabs/financeiro',
+      classe: 'tile-financeiro'
     },
     {
       titulo: 'Estoque',
       descricao: 'Cadastre produtos, controle quantidades e precos',
       icone: 'cube-outline',
-      rota: '/estoque',
+      rota: '/tabs/estoque',
       classe: 'tile-estoque'
     },
     {
-      titulo: 'Financeiro',
-      descricao: 'Receitas, despesas e saldo em um so lugar',
-      icone: 'wallet-outline',
-      rota: '/financeiro',
-      classe: 'tile-financeiro'
+      titulo: 'Relatorios',
+      descricao: 'Graficos e indicadores de todo o sistema',
+      icone: 'bar-chart-outline',
+      rota: '/tabs/relatorios',
+      classe: 'tile-relatorios'
+    },
+    {
+      titulo: 'Usuarios',
+      descricao: 'Gerencie contas, permissoes e dados cadastrais',
+      icone: 'people-outline',
+      rota: '/tabs/usuarios',
+      classe: 'tile-usuarios'
     }
   ];
 
@@ -77,25 +81,19 @@ export class HomePage implements OnInit {
     addIcons({
       logOutOutline, peopleOutline, chevronForwardOutline, personCircleOutline,
       checkmarkCircleOutline, sparklesOutline, cubeOutline, walletOutline,
-      moonOutline, sunnyOutline
+      moonOutline, sunnyOutline, barChartOutline, alertCircleOutline, timeOutline
     });
   }
 
   ngOnInit(): void {
-    this.usuarioService.search('', '', 0, 1).subscribe({
-      next: (result) => (this.totalUsuarios = result.totalElements)
-    });
-
-    this.produtoService.search('', '', 0, 1).subscribe({
-      next: (result) => (this.totalProdutos = result.totalElements)
-    });
-
-    this.lancamentoService.resumo().subscribe({
-      next: (resumo) => {
-        this.saldoFinanceiro = resumo.saldo;
-        this.loadingStats = false;
-      },
-      error: () => (this.loadingStats = false)
+    this.relatorioService.dashboard().subscribe({
+      next: (dados) => {
+        this.totalUsuarios = dados.totalUsuarios;
+        this.totalProdutos = dados.totalProdutos;
+        this.saldoFinanceiro = dados.saldo;
+        this.estoqueBaixo = dados.totalProdutosEstoqueBaixo;
+        this.aVencer = dados.lancamentosAVencer;
+      }
     });
   }
 

@@ -39,6 +39,14 @@ ion-segment-button {
   font-weight: 600;
 }
 
+/* ===== Transicao de tema ===== */
+body,
+ion-content,
+ion-toolbar,
+ion-tab-bar {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
 /* ===== Auth (login/register) ===== */
 
 .auth-page {
@@ -175,5 +183,13 @@ body.dark .auth-card {
     --max-height: 85vh;
     --border-radius: var(--app-radius-lg);
     --box-shadow: var(--app-shadow-lg);
+  }
+
+  /* A barra de abas tambem acompanha a largura centralizada do conteudo,
+     com cantos arredondados no topo para parecer uma dock flutuante. */
+  ion-tab-bar {
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: var(--app-radius-lg) var(--app-radius-lg) 0 0;
   }
 }

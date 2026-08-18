@@ -2,7 +2,7 @@
 
 # Sistema de Gestão
 
-Backend em **Spring Boot** + frontend em **Ionic/Angular**, com autenticação JWT segura (cookie `HttpOnly`), tema claro/escuro e três módulos: **Usuários**, **Estoque** e **Financeiro**.
+Backend em **Spring Boot** + frontend em **Ionic/Angular**, com autenticação JWT segura (cookie `HttpOnly`), tema claro/escuro, navegação por abas e quatro módulos: **Usuários**, **Estoque**, **Financeiro** e **Relatórios**.
 
 Funciona no navegador e como app nativo Android/iOS (via Capacitor), a partir do mesmo código.
 
@@ -54,17 +54,18 @@ Receitas, despesas e saldo, com filtro por tipo e status.
 | Módulo | O que faz |
 |---|---|
 | **Login / Cadastro** | Autenticação com bloqueio após tentativas falhas e política de senha forte |
-| **Home** | Dashboard com indicadores dos 3 módulos e atalho para cada um |
+| **Home** | Dashboard com indicadores rápidos, alertas de estoque baixo/contas a vencer e atalhos para cada módulo |
 | **Usuários** | CRUD com busca por nome/login, paginação, edição do próprio usuário logado |
 | **Estoque** | Produtos a vulso: código, categoria, unidade de medida, preços, estoque e alerta de estoque baixo |
 | **Financeiro** | Lançamentos de receita/despesa com forma de pagamento, status e resumo de saldo |
-| **Tema** | Alternância claro/escuro pelo botão no topo da Home, com preferência salva |
+| **Relatórios** | Painel com gráficos (financeiro mensal, distribuição por categoria) e lista de produtos com estoque baixo |
+| **Navegação** | Barra de abas fixa (Início, Financeiro, Estoque, Relatórios, Usuários), com tema claro/escuro salvo por dispositivo |
 
 ## Stack
 
 **Backend:** Java 21 · Spring Boot 3.3 · Spring Security (JWT em cookie `HttpOnly`) · Spring Data JPA · PostgreSQL · Flyway · Bean Validation · BCrypt
 
-**Frontend:** Angular 18 (standalone) · Ionic 8 · Capacitor 6 · Reactive Forms · AuthGuard + Interceptors
+**Frontend:** Angular 18 (standalone) · Ionic 8 (ion-tabs) · Capacitor 6 · Reactive Forms · AuthGuard + Interceptors · Gráficos em SVG nativo (sem dependências externas)
 
 ## Segurança
 
@@ -90,8 +91,9 @@ meu-projeto/
     └── src/app/
         ├── core/                    # services, guards, interceptors, models
         └── pages/
-            ├── login/ register/ home/
-            ├── usuarios/ estoque/ financeiro/
+            ├── login/ register/
+            ├── tabs/                # shell com a barra de abas (ion-tabs)
+            └── home/ usuarios/ estoque/ financeiro/ relatorios/
 ```
 
 ## Pré-requisitos
